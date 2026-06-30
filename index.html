@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>W.V.H. Isurindi | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #a8ff78;
+      --accent2: #78ffd6;
+      --text: #e8e8e8;
+      --muted: #888;
+      --display: 'Playfair Display', serif;
+      --body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.02em;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 5vw;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,255,120,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+      width: 100%;
+    }
+
+    /* HERO TEXT */
+    .hero-tag {
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
+    }
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* HERO PHOTO */
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    /* Decorative accent ring behind the photo */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        var(--accent) 0%,
+        var(--accent2) 30%,
+        transparent 50%,
+        var(--accent2) 70%,
+        var(--accent) 100%
+      );
+      animation: spin 8s linear infinite;
+      z-index: 0;
+    }
+    /* Thin dark gap between ring and image */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: var(--bg);
+      z-index: 1;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .hero-photo {
+      position: relative;
+      z-index: 2;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      /* Subtle green-tinted shadow to tie into the palette */
+      filter: drop-shadow(0 0 32px rgba(168,255,120,0.15));
+    }
+    /* Fallback placeholder shown when no real image is set */
+    .hero-photo-placeholder {
+      position: relative;
+      z-index: 2;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .hero-photo-placeholder span { font-size: 2.5rem; }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        text-align: center;
+        justify-items: center;
+        gap: 2.5rem;
+      }
+      /* Photo goes on top on mobile */
+      .hero-photo-wrap { order: -1; }
+      .hero-photo, .hero-photo-placeholder { width: 200px; height: 200px; }
+      .hero-sub { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+    }
+    .btn {
+      padding: 0.75rem 1.8rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0e0e0e;
+    }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Small icon buttons row below main hero CTAs */
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 1rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .btn-icon svg {
+      width: 13px; height: 13px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+    .btn-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    @media (max-width: 900px) {
+      .hero-links { justify-content: center; }
+    }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      line-height: 1.15;
+    }
+
+    /* ABOUT */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; }
+    .about-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .detail-row { display: flex; gap: 0.75rem; }
+    .detail-label { color: var(--accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; min-width: 110px; padding-top: 2px; }
+    .detail-val { color: var(--muted); font-size: 0.95rem; }
+
+    /* SKILLS */
+    #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .skill-group h3 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: var(--border);
+      color: var(--muted);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--text); }
+
+    /* PROJECTS */
+    #projects { border-top: 1px solid var(--border); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.25s;
+      z-index: 1;
+    }
+    .project-card:hover { border-color: #444; transform: translateY(-3px); }
+    .project-card:hover::before { opacity: 1; }
+
+    /* Project thumbnail */
+    .project-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(0.85) saturate(0.9);
+    }
+    .project-card:hover .project-img {
+      transform: scale(1.04);
+      filter: brightness(1) saturate(1);
+    }
+    /* Placeholder when no image is provided */
+    .project-img-placeholder {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    .project-img-placeholder span { font-size: 2rem; opacity: 0.4; }
+
+    /* Card body (text area below image) */
+    .project-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
+    .project-num { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .project-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.2rem; flex: 1; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .project-stack span {
+      font-size: 0.72rem; color: var(--accent2);
+      background: rgba(120,255,214,0.08);
+      padding: 0.2rem 0.6rem; border-radius: 2px;
+    }
+    .project-links { display: flex; gap: 1rem; }
+    .project-links a { color: var(--muted); font-size: 0.82rem; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+    .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .timeline { display: flex; flex-direction: column; gap: 2.5rem; }
+    .timeline-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; }
+    .timeline-period { color: var(--muted); font-size: 0.82rem; padding-top: 3px; }
+    .timeline-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .timeline-content .company { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .timeline-content p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ACHIEVEMENTS */
+    #achievements { border-top: 1px solid var(--border); }
+    .achievements-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+    .achievement {
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 1.5rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .achievement:hover { border-color: var(--accent); }
+    .achievement-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .achievement h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .achievement p { color: var(--muted); font-size: 0.85rem; }
+
+    /* EDUCATION */
+    #education { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .edu-card {
+      border: 1px solid var(--border); border-radius: 8px; padding: 2rem;
+      display: flex; gap: 2rem; align-items: flex-start; max-width: 700px;
+    }
+    .edu-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .edu-card .institution { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .edu-card p { color: var(--muted); font-size: 0.88rem; }
+
+    /* CONTACT */
+    #contact { border-top: 1px solid var(--border); text-align: center; }
+    #contact h2 { margin-bottom: 1rem; }
+    #contact p { color: var(--muted); max-width: 420px; margin: 0 auto 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-link {
+      color: var(--muted); text-decoration: none; font-size: 0.88rem;
+      display: flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--border); padding: 0.6rem 1.2rem;
+      border-radius: 4px; transition: all 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* SCROLL PROGRESS BAR */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 999;
+      transition: width 0.1s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* OPEN TO WORK BADGE */
+    .otw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(168,255,120,0.08);
+      border: 1px solid rgba(168,255,120,0.25);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    .otw-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(168,255,120,0.6); }
+      50%       { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 5px rgba(168,255,120,0); }
+    }
+    @media (max-width: 900px) {
+      .otw-badge { margin: 0 auto 1rem; }
+    }
+
+    /* TYPING EFFECT */
+    .hero-sub .typed-role {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.75s step-end infinite;
+      border-radius: 1px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* GITHUB STATS */
+    .github-stats-wrap {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .github-stats-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .github-stats-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .github-stats-cards img {
+      border-radius: 6px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--border);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem 5vw;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Hasini.codes</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+
+    <!-- LEFT: Text content -->
+    <div class="hero-text">
+      <!-- Open to Work Badge -->
+      <div class="otw-badge">
+        <span class="otw-dot"></span>
+        Open to Work · Software Engineering Internship
+      </div>
+
+      <div class="hero-tag">Software Engineering Student · NSBM Green University</div>
+      <h1>Hi, I'm <span>Hasini</span>.<br>I build things for the web.</h1>
+
+      <!-- Typing effect subtitle -->
+      <p class="hero-sub">
+        A passionate Software Engineering undergraduate who builds
+        <span class="typed-role" id="typed-role"></span><span class="typed-cursor"></span>
+      </p>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="mailto:hasiniisurindi@gmail.com" class="btn btn-outline">Get In Touch</a>
+      </div>
+
+      <!-- Small secondary links -->
+      <div class="hero-links">
+        <a href="HasiniIsurindiCv.pdf" class="btn-icon" download>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6zm7-5.5v3h-2v-3H9.5l2.5-2.5 2.5 2.5H13z"/></svg>
+          Download CV
+        </a>
+        <a href="https://www.linkedin.com/in/hasiniisurindi/" class="btn-icon" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452H17.01v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.588V9h3.299v1.561h.046c.459-.87 1.582-1.788 3.255-1.788 3.483 0 4.126 2.292 4.126 5.272v6.407zM5.337 7.433a1.915 1.915 0 1 1 0-3.83 1.915 1.915 0 0 1 0 3.83zm1.65 13.019H3.685V9h3.302v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- GitHub Activity Stats -->
+      <div class="github-stats-wrap">
+        <div class="github-stats-label">GitHub Activity</div>
+        <div class="github-stats-cards">
+          <img
+            src="https://github-readme-stats.vercel.app/api?username=HasiniIsurindi&show_icons=true&theme=dark&bg_color=161616&title_color=a8ff78&icon_color=78ffd6&text_color=888888&border_color=2a2a2a&hide_border=false&count_private=true&rank_icon=github"
+            alt="Hasini's GitHub Stats"
+          />
+          <img
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=HasiniIsurindi&layout=compact&theme=dark&bg_color=161616&title_color=a8ff78&text_color=888888&border_color=2a2a2a&hide_border=false&langs_count=6"
+            alt="Top Languages"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Profile photo -->
+    <div class="hero-photo-wrap">
+      
+      <img src="Profile.png" alt="Hasini Isurindi" class="hero-photo" />
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2>About Me</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a 3rd-year Software Engineering undergraduate at NSBM Green University, passionate about building impactful software. I enjoy working across the full stack, from designing intuitive UIs to architecting reliable backend systems.</p>
+      <p>When I'm not coding, I'm exploring new technologies, contributing to open source, or participating in hackathons. I'm always looking for problems worth solving.</p>
+    </div>
+    <div class="about-details">
+      <div class="detail-row">
+        <span class="detail-label">Name</span>
+        <span class="detail-val">Wekada Vitharanage Hasini Isurindi</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location</span>
+        <span class="detail-val">Colombo, Sri Lanka</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">University</span>
+        <span class="detail-val">NSBM Green University</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Degree</span>
+        <span class="detail-val">BSc. Hons in Software Engineering (Year 3)</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">GPA</span>
+        <span class="detail-val">3.63 / 4.00</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email</span>
+        <span class="detail-val">hasiniisurindi@gmail.com</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">LinkedIn</span>
+        <span class="detail-val">linkedin.com/in/hasiniisurindi</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">GitHub</span>
+        <span class="detail-val">github.com/HasiniIsurindi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Work With</div>
+  <h2>Skills & Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Java</span>
+	<span class="tag">C#</span>
+        <span class="tag">C++</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Frontend</h3>
+      <div class="skill-tags">
+        <span class="tag">React</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Backend</h3>
+      <div class="skill-tags">
+	<span class="tag">MySQL</span>
+	<span class="tag">SQLite</span>
+        <span class="tag">Node.js</span>
+	<span class="tag">.NET APIs</span>
+        <span class="tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Database & Tools</h3>
+      <div class="skill-tags">
+        <span class="tag">MongoDB</span>
+        <span class="tag">Git</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Firebase</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <img src="Project1.png" alt="SkillCoachR screenshot" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">01 — Featured</div>
+        <h3>SkillCoachR: AI Driven learning companion</h3>
+        <p>Designed the full system architecture, including APIs, database, authentication, and frontend/backend/AI/cloud integration, while building AI-powered features such as personalized learning roadmaps and skill gap analysis with scalable backend services and a Neo-Brutalist cross-platform UI/UX, and improving UI consistency and user experience within the progress tracking module.
+</p>
+        <div class="project-stack">
+          <span>Dart</span><span>Flutter</span><span>Firebase</span><span>Groq API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/NaduX99/SkillCoach-MAD">GitHub →</a>
+          <a href="https://drive.google.com/file/d/14jCD-KUoZWEBKFXdhcE-4eyK5pav6519/view?usp=sharing">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project2.png" alt="AI Resume Analyser screenshot" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">02</div>
+        <h3>AI Resume Analyser</h3>
+        <p>Built an AI-powered Resume Analyzer using Next.js 15, TypeScript, and Tailwind CSS, integrating the Claude API to generate structured feedback on impact, clarity, skills, formatting, and ATS compatibility. Implemented client-side resume parsing for PDF, DOCX, and TXT files using pdfjs-dist, Mammoth.js, and the FileReader API, ensuring complete privacy by processing files entirely in the browser without backend storage.
+</p>
+        <div class="project-stack">
+          <span>Next.js</span><span>React</span><span>TypeScript</span><span>Groq API</span><span>Tailwind CSS</span><span>FileReader API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/AI-Resume-Analyzer">GitHub →</a>
+          <a href="https://drive.google.com/file/d/1SyAXM45KVstsVLCreHuvl3ixw8zvJ06n/view?usp=sharing">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project3.png" alt="Mama Bloom" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">03</div>
+        <h3>Mama Bloom - Pregnancy Tracker</h3>
+        <p>A cross-platform pregnancy care app using React Native (Expo) and TypeScript with a modular, scalable architecture. Implemented role-based onboarding (patient/doctor), dynamic theming, and navigation using React Navigation (tabs + stack). Built core features including pregnancy tracking calendar, baby development module, risk assessment system, diary notes, and medical articles. Designed a doctor dashboard for patient management with risk insights and detailed profiles. Used Context API and AsyncStorage for state management with a backend-ready Node.js/Express structure.
+</p>
+        <div class="project-stack">
+          <span>React Native</span><span>TypeScript</span><span>React Navigation</span><span>Context API</span><span>Node.js</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/Mama_Bloom">GitHub →</a>
+          <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project4.jpg" alt="CarX Auction Platform" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">04</div>
+        <h3>CarX Auction Platform</h3>
+        <p>Built a backend-driven car auction system with a clean RESTful API architecture, role-based authentication (Admin, Seller, User), and a modular service structure supporting full auction lifecycle management (creation, approval, and live bidding), including real-time bid tracking. Integrated EF Core with SQLite for centralized data handling, designed the data access layer with DbContext for entity relationships (Seller, Buyer, Auction, Vehicle, Bid), implemented a DataInitializer for seeding default data, and developed a Seller ViewModel to efficiently link seller information with auction details for seamless frontend display.
+</p>
+        <div class="project-stack">
+          <span>ASP.NET Core Web API</span><span>Entity Framework Core</span><span>SQLite</span><span>RESTful APIs</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/NaduX99/CarX-Auction">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project5.png" alt="My study Mate" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">05</div>
+        <h3>My Study Mate LMS</h3>
+        <p>Developed and configured an LMS-based A/L Physics learning platform with structured courses, video lectures, paper classes, and model paper discussions, featuring a fully responsive UI and student dashboard, while integrating LMS plugins, optimizing video streaming via Bunny.net, deploying the live production system, and contributing to overall frontend and backend customization, performance tuning, and system integration. Now website is live and functioning with more than 200 registered users. 
+</p>
+        <div class="project-stack">
+          <span>wordpress</span><span>Elementor</span><span>Kadence Child Theme</span><span>Tutor LMS</span><span>PHP (Code snippets)</span><span>Bunny.net</span><span>Hostinger hosting</span><span>domains.lk domain management</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/Study_Mate">GitHub →</a>
+          <a href="https://mystudymate.edu.lk">Live Website →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project6.png" alt="Wedding Invitation" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">06</div>
+        <h3>Wedding Invitation Microsite</h3>
+        <p> Developed a fully responsive, animated digital invitation microsite using Next.js with TypeScript and App Router architecture. Implemented cinematic UI/UX with Framer Motion animations including loading screen, hero effects, countdown timer, floating elements, and interactive event sections. Integrated Formspree for RSVP form handling, Google Maps for location embedding, and ambient background music with controlled autoplay
+behavior. Deployed the application using Vercel with automated CI/CD via GitHub. 
+</p>
+        <div class="project-stack">
+          <span>Next.js</span><span>React 18</span><span>TypeScript</span><span>Tailwind CSS</span><span>Framer motion</span><span>Formspree</span><span>vercel</span><span>Google Maps API(embed)</span><span>HTML5 Audio</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/Wedding-Invitation">GitHub →</a>
+          <a href="https://kaveesha-and-dinithi.vercel.app/">Live Website →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project7.jpg" alt="Espace" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">07</div>
+        <h3>Espace</h3>
+        <p>Designed and implemented a layered architecture (Presentation, Business Logic, Data Access) with Windows Forms UI, focusing on modular design, validation, and structured workflow management for astronaut registration and settlement processes. And a full end-to-end system independently, including database schema design, CRUD operations, entity relationships (astronauts, dependents, pilots, jets, jobs, housing), and lifecycle management from registration to post-settlement allocation.</p>
+        <div class="project-stack">
+          <span>C#</span><span>.NET Framework</span><span>Visual Studio 2022</span><span>MySQL</span><span>ADO.NET</span><span>SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/Espace">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="Project8.jpg" alt="Grifindo Lanka Toys" class="project-img" />
+      <div class="project-body">
+        <div class="project-num">08</div>
+        <h3>Grifindo Lanka Toys - Leave Management system</h3>
+        <p>Developed a complete desktop-based Leave Management System independently, implementing employee/admin
+modules, authentication, leave application processing, approval workflow, CRUD operations, reporting, and database design for centralized leave tracking and management. 
+</p>
+        <div class="project-stack">
+          <span>C#</span><span>.NET Framework (WinForms)</span><span>Microsoft SQL Server</span><span>Visual Studio 2022</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/HasiniIsurindi/Grifindo_Lanka_Toys">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2>Achievements</h2>
+  <div class="achievements-list">
+    <div class="achievement">
+      <div class="achievement-icon">🏆</div>
+      <div>
+        <h3>1st RunnersUp — Ideathon 1.0</h3>
+        <p>Achieved 1st Runners Up at IDEATHON 1.0 for developing “MindHug,” an AI-driven bilingual mental health support platform combining psychological care with software engineering solutions</p>
+      </div>
+    </div>
+    <div class="achievement">
+      <div class="achievement-icon">⭐</div>
+      <div>
+        <h3>Partcipant: GreenXtreme 2025</h3>
+        <p>Participated in GreenXtreme 2025 programming competition organized by IEEE Student Branch NSBM, gaining experience in teamwork, problem-solving, and competitive coding.
+</p>
+      </div>
+    </div>
+    <div class="achievement">
+      <div class="achievement-icon">⭐</div>
+      <div>
+        <h3>Partcipant: Dynalab</h3>
+        <p>Participated in Dynalab: The MATLAB Workshop (Fundamentals & Advanced) by NSBM Mathematics and Statistics Circle, gaining hands-on experience in MATLAB programming, data visualization, and computational problem-solving</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2>Education</h2>
+  <div class="edu-card">
+    <div>
+      <h3>BSc. (Hons) in Software Engineering</h3>
+      <div class="institution">NSBM Green University · 2023 – 2026</div>
+      <p>Current GPA : 3.63/4.00
+</p>
+    </div>
+
+  </div>
+  <div class="edu-card">
+    <div>
+      <h3>G.C.E. Advanced Level</h3>
+      <div class="institution">St. Thomas Girls' High School, Matara · 2011 – 2019</div>
+      <p>2Cs, 1S Biological Science
+</p>
+    </div>
+   </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Talk</div>
+  <h2>Get In Touch</h2>
+  <p>I'm actively looking for software engineering internship opportunities. If you have a role or just want to say hi, my inbox is open.</p>
+  <div class="contact-links">
+    <a href="mailto:hasiniisurindi@gmail.com" class="contact-link">✉ Email Me</a>
+    <a href="https://www.linkedin.com/in/hasiniisurindi/" class="contact-link">in LinkedIn</a>
+    <a href="https://github.com/HasiniIsurindi" class="contact-link">⌥ GitHub</a>
+    <a href="HasiniIsurindiCv.pdf" class="contact-link" download>↓ Resume</a>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by Hasini Isurindi · 2026</p>
+</footer>
+
+<script>
+  /* ── 1. SCROLL PROGRESS BAR ── */
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }, { passive: true });
+
+  /* ── 2. TYPING EFFECT ── */
+  const roles = [
+    'full-stack web apps.',
+    'mobile applications.',
+    'AI-powered tools.',
+    'clean, scalable systems.',
+    'things that matter.',
+  ];
+  const el = document.getElementById('typed-role');
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const TYPE_SPEED   = 65;
+  const DELETE_SPEED = 35;
+  const PAUSE_END    = 1800;
+  const PAUSE_START  = 300;
+
+  function type() {
+    const current = roles[roleIndex];
+    if (isDeleting) {
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let delay = isDeleting ? DELETE_SPEED : TYPE_SPEED;
+
+    if (!isDeleting && charIndex === current.length) {
+      delay = PAUSE_END;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      delay = PAUSE_START;
+    }
+    setTimeout(type, delay);
+  }
+  setTimeout(type, 800);
+</script>
+
+</body>
+</html>
