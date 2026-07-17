@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>W.V.H. Isurindi | Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,8 +18,9 @@
       --accent2: #78ffd6;
       --text: #e8e8e8;
       --muted: #888;
-      --display: 'Playfair Display', serif;
+      --display: 'Space Grotesk', sans-serif;
       --body: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -50,7 +52,7 @@
       letter-spacing: 0.02em;
     }
     nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    nav a { font-family: var(--mono); color: var(--muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; transition: color 0.2s; }
     nav a:hover { color: var(--accent); }
 
     /* HERO */
@@ -78,14 +80,16 @@
 
     /* HERO TEXT */
     .hero-tag {
-      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-family: var(--mono);
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
     }
     h1 {
       font-family: var(--display);
       font-size: clamp(3rem, 7vw, 5.5rem);
       line-height: 1.05;
-      font-weight: 700;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       margin-bottom: 1.5rem;
     }
     h1 span {
@@ -183,11 +187,12 @@
       .hero-btns { justify-content: center; }
     }
     .btn {
+      font-family: var(--mono);
       padding: 0.75rem 1.8rem;
       border-radius: 4px;
-      font-size: 0.875rem;
+      font-size: 0.82rem;
       font-weight: 500;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       text-decoration: none;
       transition: all 0.2s;
       cursor: pointer;
@@ -218,9 +223,10 @@
       gap: 0.45rem;
       padding: 0.45rem 1rem;
       border-radius: 4px;
-      font-size: 0.78rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       text-decoration: none;
       border: 1px solid var(--border);
       color: var(--muted);
@@ -243,13 +249,16 @@
     /* SECTION COMMON */
     section { padding: 6rem 5vw; }
     .section-label {
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-family: var(--mono);
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--accent); font-weight: 500; margin-bottom: 0.5rem;
     }
+    .section-label::before { content: '// '; opacity: 0.6; }
     h2 {
       font-family: var(--display);
       font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       margin-bottom: 3rem;
       line-height: 1.15;
     }
@@ -262,20 +271,21 @@
     .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; }
     .about-details { display: flex; flex-direction: column; gap: 1.2rem; }
     .detail-row { display: flex; gap: 0.75rem; }
-    .detail-label { color: var(--accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; min-width: 110px; padding-top: 2px; }
+    .detail-label { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; min-width: 110px; padding-top: 2px; }
     .detail-val { color: var(--muted); font-size: 0.95rem; }
 
     /* SKILLS */
     #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-    .skill-group h3 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+    .skill-group h3 { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 500; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .tag {
+      font-family: var(--mono);
       background: var(--border);
       color: var(--muted);
       padding: 0.3rem 0.75rem;
       border-radius: 3px;
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       border: 1px solid transparent;
       transition: all 0.2s;
     }
@@ -339,26 +349,104 @@
 
     /* Card body (text area below image) */
     .project-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
-    .project-num { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-    .project-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-num { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+    .project-card h3 { font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.005em; }
     .project-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.2rem; flex: 1; }
     .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
     .project-stack span {
-      font-size: 0.72rem; color: var(--accent2);
+      font-family: var(--mono);
+      font-size: 0.7rem; color: var(--accent2);
       background: rgba(120,255,214,0.08);
       padding: 0.2rem 0.6rem; border-radius: 2px;
     }
     .project-links { display: flex; gap: 1rem; }
-    .project-links a { color: var(--muted); font-size: 0.82rem; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+    .project-links a { font-family: var(--mono); color: var(--muted); font-size: 0.78rem; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
     .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* CURRENT RESEARCH & PROJECTS */
+    #research { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .research-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .research-card:hover { border-color: var(--accent); }
+    .research-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+    }
+    .research-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      display: block;
+      border-right: 1px solid var(--border);
+    }
+    .research-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    .research-photo-placeholder span { font-size: 2rem; opacity: 0.4; }
+    .research-body { padding: 1.8rem 2rem; display: flex; flex-direction: column; }
+    .research-status {
+      font-family: var(--mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      background: rgba(168,255,120,0.08);
+      border: 1px solid rgba(168,255,120,0.25);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .research-status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .research-card h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.6rem; letter-spacing: -0.005em; }
+    .research-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.2rem; }
+    .research-card .project-stack { margin-bottom: 0; }
+    @media (max-width: 700px) {
+      .research-card { grid-template-columns: 1fr; }
+      .research-photo, .research-photo-placeholder { min-height: 180px; }
+    }
 
     /* EXPERIENCE */
     #experience { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .timeline { display: flex; flex-direction: column; gap: 2.5rem; }
     .timeline-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; }
-    .timeline-period { color: var(--muted); font-size: 0.82rem; padding-top: 3px; }
-    .timeline-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
-    .timeline-content .company { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .timeline-period { font-family: var(--mono); color: var(--muted); font-size: 0.78rem; padding-top: 3px; }
+    .timeline-content h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .timeline-content .company { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; margin-bottom: 0.6rem; }
     .timeline-content p { color: var(--muted); font-size: 0.9rem; }
 
     /* ACHIEVEMENTS */
@@ -372,7 +460,7 @@
     }
     .achievement:hover { border-color: var(--accent); }
     .achievement-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .achievement h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .achievement h3 { font-family: var(--display); font-size: 0.98rem; font-weight: 600; margin-bottom: 0.3rem; }
     .achievement p { color: var(--muted); font-size: 0.85rem; }
 
     /* EDUCATION */
@@ -381,8 +469,8 @@
       border: 1px solid var(--border); border-radius: 8px; padding: 2rem;
       display: flex; gap: 2rem; align-items: flex-start; max-width: 700px;
     }
-    .edu-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
-    .edu-card .institution { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .edu-card h3 { font-family: var(--display); font-size: 1.08rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .edu-card .institution { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; margin-bottom: 0.4rem; }
     .edu-card p { color: var(--muted); font-size: 0.88rem; }
 
     /* CONTACT */
@@ -391,7 +479,8 @@
     #contact p { color: var(--muted); max-width: 420px; margin: 0 auto 2.5rem; }
     .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
     .contact-link {
-      color: var(--muted); text-decoration: none; font-size: 0.88rem;
+      font-family: var(--mono);
+      color: var(--muted); text-decoration: none; font-size: 0.82rem;
       display: flex; align-items: center; gap: 0.4rem;
       border: 1px solid var(--border); padding: 0.6rem 1.2rem;
       border-radius: 4px; transition: all 0.2s;
@@ -412,6 +501,7 @@
 
     /* OPEN TO WORK BADGE */
     .otw-badge {
+      font-family: var(--mono);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -419,10 +509,10 @@
       border: 1px solid rgba(168,255,120,0.25);
       border-radius: 999px;
       padding: 0.35rem 0.9rem;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
       color: var(--accent);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       margin-bottom: 1rem;
       width: fit-content;
     }
@@ -468,8 +558,9 @@
       border-top: 1px solid var(--border);
     }
     .github-stats-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 1rem;
@@ -491,9 +582,10 @@
 
     /* FOOTER */
     footer {
+      font-family: var(--mono);
       text-align: center; padding: 2rem 5vw;
       border-top: 1px solid var(--border);
-      color: var(--muted); font-size: 0.8rem;
+      color: var(--muted); font-size: 0.78rem;
     }
 
     @media (max-width: 700px) {
@@ -514,6 +606,7 @@
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
     <li><a href="#achievements">Achievements</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -562,8 +655,10 @@
  
     <!-- RIGHT: Profile photo -->
     <div class="hero-photo-wrap">
-      
       <img src="Profile.PNG" alt="Hasini Isurindi" class="hero-photo" />
+    </div>
+
+  </div>
 </section>
     
 
@@ -811,6 +906,36 @@ modules, authentication, leave application processing, approval workflow, CRUD o
         <div class="project-links">
           <a href="https://github.com/HasiniIsurindi/syncboard">GitHub →</a>
           <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CURRENT RESEARCH & PROJECTS -->
+<section id="research">
+  <div class="section-label">In Progress</div>
+  <h2>Current Research &amp; Projects</h2>
+  <div class="research-list">
+
+    <div class="research-card">
+      <!-- Placeholder photo — replace with actual image later -->
+      <div class="research-photo-placeholder">
+        <span>🖼</span>
+        Photo coming soon
+      </div>
+      <!-- To use a real photo instead, replace the div above with: -->
+      <!-- <img src="Differentials.png" alt="Differentials" class="research-photo" /> -->
+
+      <div class="research-body">
+        <div class="research-status">
+          <span class="research-status-dot"></span>
+          Active Development
+        </div>
+        <h3>Differentials</h3>
+        <p>Description coming soon.</p>
+        <div class="project-stack">
         </div>
       </div>
     </div>
