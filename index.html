@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>W.V.H. Isurindi | Software Engineer</title>
+  <title>Hasini Isurindi | Software Engineer</title>
+  <meta name="description" content="Hasini Isurindi — Software Engineering undergraduate at NSBM Green University building full-stack, AI-powered products. Open to internship opportunities." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hasini Isurindi | Software Engineer" />
+  <meta property="og:description" content="Software Engineering undergraduate building full-stack, AI-powered products. Open to internship opportunities." />
+  <meta property="og:image" content="https://hasini.codes/Profile.PNG" />
+  <meta property="og:url" content="https://hasini.codes" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hasini Isurindi | Software Engineer" />
+  <meta name="twitter:description" content="Software Engineering undergraduate building full-stack, AI-powered products." />
+  <meta name="twitter:image" content="https://hasini.codes/Profile.PNG" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,7 +32,7 @@
       --accent: #a8ff78;
       --accent2: #78ffd6;
       --text: #e8e8e8;
-      --muted: #888;
+      --muted: #9c9c9c;
       --display: 'Space Grotesk', sans-serif;
       --body: 'Inter', sans-serif;
       --mono: 'JetBrains Mono', monospace;
@@ -101,7 +116,16 @@
       max-width: 520px;
       color: var(--muted);
       font-size: 1.05rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.2rem;
+    }
+    /* Fixed-height line for the typed word so its changing width
+       never reflows the line above it or shifts anything below */
+    .hero-typed-line {
+      min-height: 1.7em;
+      line-height: 1.7em;
+      margin-bottom: 2.3rem;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
@@ -532,8 +556,9 @@
     }
 
     /* TYPING EFFECT */
-    .hero-sub .typed-role {
+    .hero-typed-line .typed-role {
       color: var(--text);
+      font-size: 1.05rem;
       font-weight: 500;
     }
     .typed-cursor {
@@ -593,6 +618,81 @@
       .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
       nav ul { gap: 1rem; }
     }
+
+    /* STATS STRIP */
+    #stats {
+      padding: 3rem 5vw;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    @media (max-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
+    }
+
+    /* PROJECT DESCRIPTION BULLETS */
+    .project-card .project-desc,
+    .research-card .project-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+      flex: 1;
+      list-style: none;
+      padding-left: 0;
+    }
+    .project-card .project-desc li,
+    .research-card .project-desc li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
+    }
+    .project-card .project-desc li::before,
+    .research-card .project-desc li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-size: 0.8rem;
+    }
+    .project-card .project-desc li:last-child,
+    .research-card .project-desc li:last-child { margin-bottom: 0; }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -627,13 +727,11 @@
       </div>
 
       <div class="hero-tag">Software Engineering Student · NSBM Green University</div>
-      <h1>Hi, I'm <span>Hasini</span>.<br>I build things for the web.</h1>
+      <h1>Hi, I'm <span>Hasini</span>.<br>I build full-stack products with AI at the core.</h1>
 
       <!-- Typing effect subtitle -->
-      <p class="hero-sub">
-        A passionate Software Engineering undergraduate who builds
-        <span class="typed-role" id="typed-role"></span><span class="typed-cursor"></span>
-      </p>
+      <p class="hero-sub">A passionate Software Engineering undergraduate who builds</p>
+      <p class="hero-typed-line"><span class="typed-role" id="typed-role"></span><span class="typed-cursor"></span></p>
 
       <div class="hero-btns">
         <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -660,7 +758,28 @@
 
   </div>
 </section>
-    
+
+<!-- STATS STRIP -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">11+</div>
+      <div class="stat-label">Projects Shipped</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Users on a Live Product</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3.63</div>
+      <div class="stat-label">GPA / 4.00</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3rd Yr</div>
+      <div class="stat-label">Software Engineering</div>
+    </div>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about">
@@ -760,13 +879,16 @@
   <h2>Projects</h2>
   <div class="projects-grid">
 
-    <div class="project-card">
-      <img src="Project1.png" alt="SkillCoachR screenshot" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project1.png" alt="SkillCoachR screenshot" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">01 — Featured</div>
         <h3>SkillCoachR: AI Driven learning companion</h3>
-        <p style="text-align: justify;">Designed the full system architecture, including APIs, database, authentication, and frontend/backend/AI/cloud integration, while building AI-powered features such as personalized learning roadmaps and skill gap analysis with scalable backend services and a Neo-Brutalist cross-platform UI/UX, and improving UI consistency and user experience within the progress tracking module.
-</p>
+        <ul class="project-desc">
+          <li>Designed the full system architecture — APIs, database, authentication, and frontend/backend/AI/cloud integration</li>
+          <li>Built AI-powered features including personalized learning roadmaps and skill gap analysis on scalable backend services</li>
+          <li>Delivered a Neo-Brutalist cross-platform UI/UX and improved consistency in the progress-tracking module</li>
+        </ul>
         <div class="project-stack">
           <span>Dart</span><span>Flutter</span><span>Firebase</span><span>Groq API</span>
         </div>
@@ -777,13 +899,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="Project2.png" alt="AI Resume Analyser screenshot" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project2.png" alt="AI Resume Analyser screenshot" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">02</div>
         <h3>AI Resume Analyser</h3>
-        <p>Built an AI-powered Resume Analyzer using Next.js 15, TypeScript, and Tailwind CSS, integrating the Claude API to generate structured feedback on impact, clarity, skills, formatting, and ATS compatibility. Implemented client-side resume parsing for PDF, DOCX, and TXT files using pdfjs-dist, Mammoth.js, and the FileReader API, ensuring complete privacy by processing files entirely in the browser without backend storage.
-</p>
+        <ul class="project-desc">
+          <li>Built with Next.js 15, TypeScript, and Tailwind CSS, integrating the Claude API for structured feedback on impact, clarity, skills, formatting, and ATS compatibility</li>
+          <li>Implemented fully client-side parsing for PDF, DOCX, and TXT (pdfjs-dist, Mammoth.js, FileReader API)</li>
+          <li>Zero backend storage — resumes never leave the browser, so privacy is guaranteed by design</li>
+        </ul>
         <div class="project-stack">
           <span>Next.js</span><span>React</span><span>TypeScript</span><span>Groq API</span><span>Tailwind CSS</span><span>FileReader API</span>
         </div>
@@ -794,13 +919,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="Project3.png" alt="Mama Bloom" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project3.png" alt="Mama Bloom" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">03</div>
         <h3>Mama Bloom - Pregnancy Tracker</h3>
-        <p>A cross-platform pregnancy care app using React Native (Expo) and TypeScript with a modular, scalable architecture. Implemented role-based onboarding (patient/doctor), dynamic theming, and navigation using React Navigation (tabs + stack). Built core features including pregnancy tracking calendar, baby development module, risk assessment system, diary notes, and medical articles. Designed a doctor dashboard for patient management with risk insights and detailed profiles. Used Context API and AsyncStorage for state management with a backend-ready Node.js/Express structure.
-</p>
+        <ul class="project-desc">
+          <li>Cross-platform pregnancy care app (React Native/Expo, TypeScript) with role-based onboarding for patients and doctors</li>
+          <li>Built pregnancy tracking calendar, baby development module, risk assessment system, diary notes, and medical articles</li>
+          <li>Designed a doctor dashboard for patient management with risk insights, backed by a Node.js/Express-ready structure</li>
+        </ul>
         <div class="project-stack">
           <span>React Native</span><span>TypeScript</span><span>React Navigation</span><span>Context API</span><span>Node.js</span>
         </div>
@@ -811,13 +939,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="projecthazai.png" alt="projecthazai" class="project-img" />
+    <div class="project-card reveal">
+      <img src="projecthazai.png" alt="projecthazai" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">04</div>
         <h3>Haz-AI - An AI with WSO2 API Manager</h3>
-        <p style="text-align: justify;">Haz AI is an AI assistant supporting chat and image analysis, built with Python/Flask and powered by Groq's Llama 4 Scout model. Every request is routed through WSO2 API Manager, which handles authentication, routing, and monitoring before reaching the AI — turning a simple AI wrapper into a properly managed API service.
-</p>
+        <ul class="project-desc">
+          <li>AI assistant supporting chat and image analysis, built with Python/Flask and powered by Groq's Llama 4 Scout model</li>
+          <li>Routed every request through WSO2 API Manager for authentication, routing, and monitoring</li>
+          <li>Turned a simple AI wrapper into a properly managed, production-style API service</li>
+        </ul>
         <div class="project-stack">
           <span>WSO2 API Manager</span><span>Groq API</span><span>Python</span><span>Flask</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
         </div>
@@ -828,13 +959,16 @@
       </div>
     </div>
 	  
-    <div class="project-card">
-      <img src="Project4.jpg" alt="CarX Auction Platform" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project4.jpg" alt="CarX Auction Platform" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">05</div>
         <h3>CarX Auction Platform</h3>
-        <p>Built a backend-driven car auction system with a clean RESTful API architecture, role-based authentication (Admin, Seller, User), and a modular service structure supporting full auction lifecycle management (creation, approval, and live bidding), including real-time bid tracking. Integrated EF Core with SQLite for centralized data handling, designed the data access layer with DbContext for entity relationships (Seller, Buyer, Auction, Vehicle, Bid), implemented a DataInitializer for seeding default data, and developed a Seller ViewModel to efficiently link seller information with auction details for seamless frontend display.
-</p>
+        <ul class="project-desc">
+          <li>Backend-driven car auction system with RESTful API architecture and role-based auth (Admin, Seller, User)</li>
+          <li>Modular service structure covering full auction lifecycle — creation, approval, and real-time bid tracking</li>
+          <li>Designed the data access layer with EF Core + SQLite (DbContext, entity relationships, seeded data) and a Seller ViewModel for clean frontend display</li>
+        </ul>
         <div class="project-stack">
           <span>ASP.NET Core Web API</span><span>Entity Framework Core</span><span>SQLite</span><span>RESTful APIs</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span>
         </div>
@@ -844,13 +978,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="Project5.png" alt="My study Mate" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project5.png" alt="My study Mate" class="project-img" loading="lazy" />
       <div class="project-body">
-        <div class="project-num">06</div>
+        <div class="project-num">06 — Featured</div>
         <h3>My Study Mate LMS</h3>
-        <p>Developed and configured an LMS-based A/L Physics learning platform with structured courses, video lectures, paper classes, and model paper discussions, featuring a fully responsive UI and student dashboard, while integrating LMS plugins, optimizing video streaming via Bunny.net, deploying the live production system, and contributing to overall frontend and backend customization, performance tuning, and system integration. Now website is live and functioning with more than 200 registered users. 
-</p>
+        <ul class="project-desc">
+          <li><strong>Live in production with 200+ registered users</strong> — an LMS-based A/L Physics learning platform</li>
+          <li>Structured courses, video lectures, paper classes, and model paper discussions with a responsive student dashboard</li>
+          <li>Optimized video streaming via Bunny.net, integrated LMS plugins, and deployed and maintained the production system end-to-end</li>
+        </ul>
         <div class="project-stack">
           <span>wordpress</span><span>Elementor</span><span>Kadence Child Theme</span><span>Tutor LMS</span><span>PHP (Code snippets)</span><span>Bunny.net</span><span>Hostinger hosting</span><span>domains.lk domain management</span>
         </div>
@@ -861,13 +998,16 @@
       </div>
     </div>
 
-<div class="project-card">
-      <img src="Project9.png" alt="Syncboard" class="project-img" />
+<div class="project-card reveal">
+      <img src="Project9.png" alt="Syncboard" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">07</div>
         <h3>Sync Board - Real-time collaborative whiteboard</h3>
-        <p>Developed a real-time collaborative whiteboard platform using Next.js, Node.js, Socket.IO, and Canvas APIs to enable low-latency multi-user collaboration. Implemented WebSocket-based real-time synchronization for live drawing, cursor tracking, room-based sessions, and instant messaging. Engineered scalable state management and persistent board storage to maintain synchronization across connected clients. Designed a responsive and interactive UI with optimized rendering performance to support seamless collaborative brainstorming and visual communication. 
-</p>
+        <ul class="project-desc">
+          <li>Real-time collaborative whiteboard (Next.js, Node.js, Socket.IO, Canvas APIs) for low-latency multi-user drawing</li>
+          <li>WebSocket-based sync for live drawing, cursor tracking, room-based sessions, and instant messaging</li>
+          <li>Engineered scalable state management and persistent board storage to keep clients in sync</li>
+        </ul>
         <div class="project-stack">
           <span>Next.js</span><span>Node.js</span><span>Socket.IO</span><span>Canvas APIs</span><span>React.js</span><span>Vercel (Frontend)</span><span>Render (Backend)</span><span>TypeScript</span>
         </div>
@@ -878,13 +1018,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="jersey.png" alt="Sports Jersey Promotion" class="project-img" />
+    <div class="project-card reveal">
+      <img src="jersey.png" alt="Sports Jersey Promotion" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">08</div>
         <h3>Sports Jersey Promotion Site</h3>
-        <p> Developed an eye-catching promotional website for the Sports Club of the Faculty of Medicine, University of Ruhuna, to launch and showcase their new sports jersey. Designed and implemented a responsive and visually engaging user interface using HTML5, CSS3, and JavaScript, incorporating modern layouts, styling, animations, and optimized media assets to enhance the promotional experience. Managed the source code using Git and GitHub, and deployed the production-ready website on Vercel with a streamlined deployment workflow for reliable online access. 
-</p>
+        <ul class="project-desc">
+          <li>Promotional website for the Sports Club, Faculty of Medicine, University of Ruhuna, to launch a new jersey design</li>
+          <li>Responsive, visually engaging UI (HTML5, CSS3, JavaScript) with custom layouts, animations, and optimized media</li>
+          <li>Deployed on Vercel with a Git/GitHub-managed, streamlined deployment workflow</li>
+        </ul>
         <div class="project-stack">
           <span>HTML</span><span>vercel</span>
         </div>
@@ -895,13 +1038,16 @@
       </div>
     </div>
 	  
-    <div class="project-card">
-      <img src="Project6.png" alt="Wedding Invitation" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project6.png" alt="Wedding Invitation" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">09</div>
         <h3>Wedding Invitation Microsite</h3>
-        <p> Developed a fully responsive, animated digital invitation microsite using Next.js with TypeScript and App Router architecture. Implemented cinematic UI/UX with Framer Motion animations including loading screen, hero effects, countdown timer, floating elements, and interactive event sections. Integrated Formspree for RSVP form handling, Google Maps for location embedding, and ambient background music with controlled autoplay behavior. Deployed the application using Vercel with automated CI/CD via GitHub. 
-</p>
+        <ul class="project-desc">
+          <li>Fully responsive, animated digital invitation built with Next.js (TypeScript, App Router)</li>
+          <li>Cinematic UI/UX with Framer Motion — loading screen, hero effects, countdown timer, and interactive event sections</li>
+          <li>Integrated Formspree for RSVP handling and Google Maps for location, deployed on Vercel with automated CI/CD</li>
+        </ul>
         <div class="project-stack">
           <span>Next.js</span><span>React 18</span><span>TypeScript</span><span>Tailwind CSS</span><span>Framer motion</span><span>Formspree</span><span>vercel</span><span>Google Maps API(embed)</span><span>HTML5 Audio</span>
         </div>
@@ -912,12 +1058,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="Project7.jpg" alt="Espace" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project7.jpg" alt="Espace" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">10</div>
         <h3>Espace</h3>
-        <p>Designed and implemented a layered architecture (Presentation, Business Logic, Data Access) with Windows Forms UI, focusing on modular design, validation, and structured workflow management for astronaut registration and settlement processes. And a full end-to-end system independently, including database schema design, CRUD operations, entity relationships (astronauts, dependents, pilots, jets, jobs, housing), and lifecycle management from registration to post-settlement allocation.</p>
+        <ul class="project-desc">
+          <li>Layered architecture (Presentation, Business Logic, Data Access) with a WinForms UI for astronaut registration and settlement workflows</li>
+          <li>Built independently end-to-end: database schema design, CRUD operations, and entity relationships (astronauts, dependents, pilots, jets, jobs, housing)</li>
+          <li>Managed full lifecycle from registration through post-settlement allocation</li>
+        </ul>
         <div class="project-stack">
           <span>C#</span><span>.NET Framework</span><span>Visual Studio 2022</span><span>MySQL</span><span>ADO.NET</span><span>SQL</span>
         </div>
@@ -927,14 +1077,16 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <img src="Project8.jpg" alt="Grifindo Lanka Toys" class="project-img" />
+    <div class="project-card reveal">
+      <img src="Project8.jpg" alt="Grifindo Lanka Toys" class="project-img" loading="lazy" />
       <div class="project-body">
         <div class="project-num">11</div>
         <h3>Grifindo Lanka Toys - Leave Management system</h3>
-        <p>Developed a complete desktop-based Leave Management System independently, implementing employee/admin
-modules, authentication, leave application processing, approval workflow, CRUD operations, reporting, and database design for centralized leave tracking and management. 
-</p>
+        <ul class="project-desc">
+          <li>Complete desktop-based Leave Management System built independently, end-to-end</li>
+          <li>Employee/admin modules with authentication, leave application processing, and approval workflow</li>
+          <li>Full CRUD operations, reporting, and database design for centralized leave tracking</li>
+        </ul>
         <div class="project-stack">
           <span>C#</span><span>.NET Framework (WinForms)</span><span>Microsoft SQL Server</span><span>Visual Studio 2022</span>
         </div>
@@ -954,10 +1106,10 @@ modules, authentication, leave application processing, approval workflow, CRUD o
   <h2>Current Research &amp; Projects</h2>
   <div class="research-list">
 
-    <div class="research-card">
+    <div class="research-card reveal">
       <!-- Placeholder photo — replace with actual image later -->
       <div class="research-photo-placeholder">
-        <img src="project001.png" alt="differentials" class="research-photo" />
+        <img src="project001.png" alt="differentials" class="research-photo" loading="lazy" />
         
       </div>
       <!-- To use a real photo instead, replace the div above with: -->
@@ -969,15 +1121,12 @@ modules, authentication, leave application processing, approval workflow, CRUD o
           Active Development
         </div>
         <h3>Differentials</h3>
-        <p>Differential is a full-stack clinical differential diagnosis assistant that generates ranked diagnoses using transparent, evidence-weighted clinical reasoning. It allows users to assess patient history, examination findings, and investigations, transcribe handwritten clinical notes using AI vision, and save cases in a Doctor's Dashboard for future review.
-
-Built with Next.js, React, Prisma, SQLite (Postgres-ready), JWT authentication, bcrypt, and Claude Vision, the project demonstrates a complete full-stack architecture with AI integration.
-
-The current version supports Medicine and Surgery, while Paediatrics, Obstetrics & Gynaecology, and Psychiatry are currently in development.
-
-The clinical logic is being developed with guidance from a medical undergraduate at the Faculty of Medicine, University of Ruhuna to ensure it reflects real-world clinical practice.
-
-</p>
+        <ul class="project-desc">
+          <li>Full-stack clinical differential diagnosis assistant generating ranked diagnoses via transparent, evidence-weighted reasoning</li>
+          <li>Assesses patient history, exam findings, and investigations; transcribes handwritten clinical notes using AI vision; saves cases in a Doctor's Dashboard</li>
+          <li>Built with Next.js, React, Prisma, SQLite (Postgres-ready), JWT auth, bcrypt, and Claude Vision</li>
+          <li>Currently supports Medicine and Surgery, with Paediatrics, O&G, and Psychiatry in development — clinical logic guided by a medical undergraduate at the Faculty of Medicine, University of Ruhuna</li>
+        </ul>
         <div class="project-stack">
         </div>
       </div>
@@ -992,14 +1141,14 @@ The clinical logic is being developed with guidance from a medical undergraduate
   <div class="section-label">Recognition</div>
   <h2>Achievements</h2>
   <div class="achievements-list">
-    <div class="achievement">
+    <div class="achievement reveal">
       <div class="achievement-icon">🏆</div>
       <div>
         <h3>1st RunnersUp — Ideathon 1.0</h3>
         <p>Achieved 1st Runners Up at IDEATHON 1.0 for developing “MindHug,” an AI-driven bilingual mental health support platform combining psychological care with software engineering solutions</p>
       </div>
     </div>
-    <div class="achievement">
+    <div class="achievement reveal">
       <div class="achievement-icon">⭐</div>
       <div>
         <h3>Partcipant: GreenXtreme 2025</h3>
@@ -1007,7 +1156,7 @@ The clinical logic is being developed with guidance from a medical undergraduate
 </p>
       </div>
     </div>
-    <div class="achievement">
+    <div class="achievement reveal">
       <div class="achievement-icon">⭐</div>
       <div>
         <h3>Partcipant: Dynalab</h3>
@@ -1021,7 +1170,7 @@ The clinical logic is being developed with guidance from a medical undergraduate
 <section id="education">
   <div class="section-label">Academic Background</div>
   <h2>Education</h2>
-  <div class="edu-card">
+  <div class="edu-card reveal">
     <div>
       <h3>BSc. (Hons) in Software Engineering</h3>
       <div class="institution">NSBM Green University · 2023 – 2026</div>
@@ -1030,7 +1179,7 @@ The clinical logic is being developed with guidance from a medical undergraduate
     </div>
 
   </div>
-  <div class="edu-card">
+  <div class="edu-card reveal">
     <div>
       <h3>G.C.E. Advanced Level</h3>
       <div class="institution">St. Thomas Girls' High School, Matara · 2011 – 2019</div>
@@ -1107,6 +1256,18 @@ The clinical logic is being developed with guidance from a medical undergraduate
     setTimeout(type, delay);
   }
   setTimeout(type, 800);
+
+  /* ── 3. SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach((el) => revealObserver.observe(el));
 </script>
 
 </body>
